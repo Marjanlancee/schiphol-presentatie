@@ -29,37 +29,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.9rem 1.8rem;
-      background: rgba(6,8,15,0.6);
+      padding: 1rem 1.8rem;
+      background: rgba(6,8,15,0.65);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .logos {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-    }
-
+    /* LCS logo — groter, originele kleuren bewaard via mix-blend */
     .logo-lcs {
-      height: 36px;
+      height: 48px;
       width: auto;
-      filter: brightness(0) invert(1);
-      opacity: 0.9;
-    }
-
-    .logo-divider {
-      width: 1px;
-      height: 24px;
-      background: rgba(255,255,255,0.15);
-    }
-
-    .logo-bright {
-      height: 24px;
-      width: auto;
-      filter: brightness(0) invert(1);
-      opacity: 0.45;
     }
 
     .nav-links {
@@ -74,10 +54,9 @@
       font-weight: 300;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(237,234,228,0.7);
+      color: rgba(237,234,228,0.75);
       text-decoration: none;
       padding: 0.45rem 0.85rem;
-      border-radius: 2px;
       transition: background 0.2s, color 0.2s;
       white-space: nowrap;
     }
@@ -89,33 +68,30 @@
 
     .nav-links a.highlight {
       color: #c47d30;
-      border: 1px solid rgba(196,125,48,0.35);
+      border: 1px solid rgba(196,125,48,0.4);
     }
 
     .nav-links a.highlight:hover {
       background: rgba(196,125,48,0.1);
-      color: #d4904a;
     }
 
-    /* ── OVERLAY TEKST ── */
-    .overlay-text {
+    /* ── BRIGHT — rechtsonder ── */
+    .logo-bright-wrap {
       position: fixed;
-      bottom: 3.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 50;
-      text-align: center;
-      pointer-events: none;
+      bottom: 1.2rem;
+      right: 1.5rem;
+      z-index: 100;
     }
 
-    .overlay-text .label {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(136,196,220,0.6);
-      font-weight: 300;
+    .logo-bright {
+      height: 22px;
+      width: auto;
+      opacity: 0.4;
+      filter: brightness(0) invert(1);
+      transition: opacity 0.2s;
     }
+
+    .logo-bright:hover { opacity: 0.7; }
   </style>
 </head>
 <body>
@@ -123,11 +99,7 @@
   <iframe src="https://time-echo-story.lovable.app" allowfullscreen></iframe>
 
   <div class="topbar">
-    <div class="logos">
-      <img src="logo-lcs.png" alt="Luchtvaart Community Schiphol" class="logo-lcs">
-      <div class="logo-divider"></div>
-      <img src="logo-bright.png" alt="Bright Work Solutions" class="logo-bright">
-    </div>
+    <img src="logo-lcs.png" alt="Luchtvaart Community Schiphol" class="logo-lcs">
     <nav class="nav-links">
       <a href="#">Vraagstukken</a>
       <a href="#">Oefening</a>
@@ -139,8 +111,8 @@
     </nav>
   </div>
 
-  <div class="overlay-text">
-    <span class="label">(ontwikkelingen)</span>
+  <div class="logo-bright-wrap">
+    <img src="logo-bright.png" alt="Bright Work Solutions" class="logo-bright">
   </div>
 
 </body>

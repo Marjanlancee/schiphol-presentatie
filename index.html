@@ -37,19 +37,12 @@
     .logo-bright-wrap { position: fixed; bottom: 1.2rem; right: 1.5rem; z-index: 100; }
     .logo-bright { height: 50px; mix-blend-mode: multiply; }
 
-    #home {
-      position: fixed; inset: 0;
-      width: 100%; height: 100%;
-      z-index: 0;
-    }
+    #home { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
     #home iframe { width: 100%; height: 100%; border: none; display: block; }
 
     .innerpage {
-      display: none;
-      position: fixed; inset: 0;
-      background: var(--ink);
-      overflow-y: auto;
-      z-index: 10;
+      display: none; position: fixed; inset: 0;
+      background: var(--ink); overflow-y: auto; z-index: 10;
     }
     .innerpage.active { display: block; }
 
@@ -67,33 +60,32 @@
     .cta:hover { background: rgba(196,125,48,0.1); }
 
     /* TICKER */
-    .ticker-wrap { overflow: hidden; }
+    .ticker-outer { overflow: hidden; position: relative; }
+    .ticker-outer::before,
+    .ticker-outer::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none;
+    }
+    .ticker-outer::before { left: 0; background: linear-gradient(to right, #fff, transparent); }
+    .ticker-outer::after  { right: 0; background: linear-gradient(to left, #fff, transparent); }
+
     .ticker-track {
-      display: flex;
-      gap: 1.5rem;
-      align-items: stretch;
+      display: flex; gap: 1.2rem; align-items: center;
       width: max-content;
-      animation: lcsscroll 90s linear infinite;
+      animation: lcsscroll 60s linear infinite;
     }
     .ticker-track:hover { animation-play-state: paused; }
+
     .ticker-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      background: #fff;
-      border: 1px solid #eee;
-      padding: 1rem 1.2rem;
-      min-width: 130px;
-      max-width: 160px;
-      height: 100px;
-      text-align: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.4rem; background: #fff; border: 1px solid #e8e8e8;
+      padding: 0.8rem 1rem; min-width: 120px; max-width: 150px; height: 90px;
+      text-align: center; flex-shrink: 0;
     }
-    .ticker-card img { height: 40px; width: auto; object-fit: contain; max-width: 120px; }
-    .ticker-card span { font-size: 0.72rem; font-weight: 600; color: #333; line-height: 1.2; }
+    .ticker-card img { height: 36px; width: auto; object-fit: contain; max-width: 110px; }
+    .ticker-card span { font-size: 0.65rem; font-weight: 600; color: #333; line-height: 1.2; font-family: Inter, sans-serif; }
+
     @keyframes lcsscroll {
-      0% { transform: translateX(0); }
+      0%   { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
   </style>
@@ -137,14 +129,13 @@
         <p style="color:rgba(255,255,255,0.9); font-size:1rem; line-height:1.8; max-width:640px;">Medewerkers langer behouden waardoor waardevolle kennis niet verloren gaat, doordat je precies weet welke vaardigheden mensen hebben en welke nog ontwikkeld moeten worden.</p>
       </div>
     </div>
-    <div style="background:#fff; padding:3rem 2rem; overflow:hidden;">
+    <div style="background:#fff; padding:3rem 2rem 4rem;">
       <div style="max-width:860px; margin:0 auto 2rem;">
         <p style="font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:#bbb800; margin-bottom:0.5rem;">Onze partners</p>
         <p style="color:#555; font-size:0.95rem;">Meer dan 70 bedrijven zijn aangesloten bij LCS.</p>
       </div>
-      <div class="ticker-wrap">
-        <div class="ticker-track" id="ticker">
-        </div>
+      <div class="ticker-outer">
+        <div class="ticker-track" id="ticker"></div>
       </div>
     </div>
   </div>
@@ -154,7 +145,7 @@
     <div class="page">
       <p class="label">Partner en Planning</p>
       <h1>Bright Work Solutions<br><em>en Agenda</em></h1>
-      <p><strong>Bright Work Solutions</strong> is onze partner in het ontwikkelen van mensen en organisaties op Schiphol. Samen werken we aan duurzame inzetbaarheid en toekomstbestendig werk.</p>
+      <p><strong>Bright Work Solutions</strong> is onze partner in het ontwikkelen van mensen en organisaties op Schiphol.</p>
       <hr class="sep">
       <h2>Agenda</h2>
       <div class="placeholder">Voeg hier de komende evenementen, bijeenkomsten en activiteiten toe.</div>
@@ -174,7 +165,6 @@
       <p><strong>Wat vond je ervan?</strong> Ben je er ook al mee bezig, of schrik je er een beetje van?</p>
       <hr class="sep">
       <h2>Automatiseer je werkplek</h2>
-      <p>In deze oefening verken je welke taken op jouw werkplek al deels geautomatiseerd kunnen worden, en wat dat betekent voor jou en je collegas.</p>
       <div class="placeholder">Voeg hier de QR code of link naar de tool toe.</div>
       <hr class="sep">
       <h2>Jouw reflectie</h2>
@@ -205,14 +195,11 @@
     <div class="page">
       <p class="label">Jouw organisatie</p>
       <h1>Als ik over 3 jaar bij jouw<br><em>organisatie naar binnen loop...</em></h1>
-      <p>Wat is er dan veranderd? Hoe ziet het werk eruit? Welke mensen werken er, en wat doen zij anders dan nu?</p>
-      <p>Met de <strong>light volwassenheids scan</strong> krijg je in korte tijd inzicht in waar jouw organisatie staat op het gebied van toekomstbestendig werk.</p>
+      <p>Wat is er dan veranderd? Hoe ziet het werk eruit?</p>
+      <p>Met de <strong>light volwassenheids scan</strong> krijg je inzicht in waar jouw organisatie staat.</p>
       <hr class="sep">
       <h2>Light Volwassenheids Scan</h2>
       <div class="placeholder">Voeg hier de scan of link naar de scan toe.</div>
-      <hr class="sep">
-      <h2>Wat levert het op?</h2>
-      <div class="placeholder">Beschrijf hier wat deelnemers uit de scan halen.</div>
       <button class="cta" onclick="showPage('scan')">Vraag de uitgebreide scan aan</button>
     </div>
   </div>
@@ -223,10 +210,9 @@
       <p class="label">Skills verhaal</p>
       <h1>De brugfunctie<br><em>van skills.</em></h1>
       <p>Skills zijn de brug tussen het werk van vandaag en het werk van morgen. Niet functies, maar <strong>wat mensen kunnen</strong> bepaalt de toekomst.</p>
-      <p>Het LCS skills framework helpt organisaties om inzichtelijk te maken welke competenties nu aanwezig zijn, en welke ontwikkeld moeten worden.</p>
       <hr class="sep">
       <h2>Het framework</h2>
-      <div class="placeholder">Voeg hier het skills framework toe, visueel of als tekst.</div>
+      <div class="placeholder">Voeg hier het skills framework toe.</div>
       <hr class="sep">
       <h2>Hoe gebruik je het?</h2>
       <div class="placeholder">Beschrijf hier hoe organisaties het framework kunnen inzetten.</div>
@@ -238,14 +224,10 @@
     <div class="page">
       <p class="label">Future Skills</p>
       <h1>Welk werk gaat<br><em>veranderen?</em></h1>
-      <p>In kaart brengen welk werk er gaat veranderen, of verdwijnen, en daar nu al op inspelen. Niet door grote reorganisaties, maar door mensen in <strong>kleine stapjes te laten ontwikkelen.</strong></p>
-      <p>Ontwikkelen en inzetbaar blijven. Leven lang ontwikkelen als motor voor duurzame werkgelegenheid op Schiphol.</p>
+      <p>In kaart brengen welk werk er gaat veranderen, of verdwijnen, en daar nu al op inspelen.</p>
       <hr class="sep">
       <h2>Welke skills zijn de toekomst?</h2>
-      <div class="placeholder">Voeg hier de future skills toe, per sector of functiegebied.</div>
-      <hr class="sep">
-      <h2>Kleine stapjes, groot verschil</h2>
-      <div class="placeholder">Beschrijf hier voorbeelden van ontwikkeltrajecten of programmas.</div>
+      <div class="placeholder">Voeg hier de future skills toe.</div>
       <hr class="sep">
       <h2>Leven Lang Ontwikkelen</h2>
       <div class="placeholder">Voeg hier informatie toe over LLO mogelijkheden en subsidies.</div>
@@ -257,17 +239,13 @@
     <div class="page">
       <p class="label">Afsluiter</p>
       <h1>Vraag de volwassenheids<br><em>scan aan.</em></h1>
-      <p>De uitgebreide volwassenheids scan gaat verder dan de quick scan. Hij neemt echte <strong>bedrijfsinformatie</strong> mee, en sectorinformatie.</p>
-      <p>Denk aan: vacatures, verloop, groei in de sector. Zo krijg je een compleet beeld van waar jouw organisatie staat en wat er in de markt speelt.</p>
+      <p>De uitgebreide volwassenheids scan neemt echte <strong>bedrijfsinformatie</strong> mee, en sectorinformatie.</p>
       <hr class="sep">
       <h2>Wat krijg je?</h2>
       <div class="placeholder">Beschrijf hier de deliverables van de uitgebreide scan.</div>
       <hr class="sep">
-      <h2>Voor wie?</h2>
-      <div class="placeholder">Beschrijf hier de doelgroep van de scan.</div>
-      <hr class="sep">
       <h2>Wat dan?</h2>
-      <p>Na de scan weet je precies waar je staat. En nog belangrijker, wat de volgende stap is. LCS en Bright Work Solutions helpen je verder.</p>
+      <p>Na de scan weet je precies waar je staat en wat de volgende stap is.</p>
       <div class="placeholder">Voeg hier een aanvraagformulier of contactgegevens toe.</div>
       <button class="cta">Scan aanvragen</button>
     </div>
@@ -278,79 +256,93 @@
   </div>
 
   <script>
-    // Partnerlijst
     const partners = [
-      { name: "1nergiek", domain: "1nergiek.nl" },
-      { name: "ACN", domain: "acn.nl" },
-      { name: "Airport Construction Services", domain: "acs-schiphol.nl" },
-      { name: "Aramex", domain: "aramex.com" },
-      { name: "Arriva Touring", domain: "arriva.nl" },
-      { name: "Asito", domain: "asito.nl" },
-      { name: "Aviapartner", domain: "aviapartner.com" },
-      { name: "avi air.", domain: "aviair.nl" },
-      { name: "Axxicom", domain: "axxicom.nl" },
-      { name: "Babcock", domain: "babcockinternational.com" },
-      { name: "Beumer Group", domain: "beumergroup.com" },
-      { name: "Bos Logistics", domain: "boslogistics.nl" },
-      { name: "Bruna", domain: "bruna.nl" },
-      { name: "Connexxion", domain: "transdev.nl" },
-      { name: "Corendon", domain: "corendon.com" },
-      { name: "CSU", domain: "csu.nl" },
-      { name: "DHL Express", domain: "dhl.com" },
-      { name: "dnata", domain: "dnata.com" },
-      { name: "dnata Catering", domain: "dnata.com" },
-      { name: "Douane", domain: "belastingdienst.nl" },
-      { name: "Facilicom Group", domain: "facilicom.nl" },
-      { name: "FedEx", domain: "fedex.com" },
-      { name: "Fokker Services Group", domain: "fokker.com" },
-      { name: "G4S", domain: "g4s.com" },
-      { name: "Gate Group", domain: "gategroup.com" },
-      { name: "Gom Schoonhouden", domain: "gom.nl" },
-      { name: "Heijmans", domain: "heijmans.nl" },
-      { name: "HMSHost", domain: "hmshost.com" },
-      { name: "Hogeschool van Amsterdam", domain: "hva.nl" },
-      { name: "I-SEC", domain: "i-sec.nl" },
-      { name: "ISS", domain: "issworld.com" },
-      { name: "Jan de Rijk Logistics", domain: "janderijk.nl" },
-      { name: "KLM", domain: "klm.com" },
-      { name: "KLM Catering Services", domain: "klm.com" },
-      { name: "Koninklijke Marechaussee", domain: "defensie.nl" },
-      { name: "Lagardere", domain: "lagardere.com" },
-      { name: "LVNL", domain: "lvnl.nl" },
-      { name: "MBO College Airport", domain: "mbocollegeairport.nl" },
-      { name: "McDonald's", domain: "mcdonalds.com" },
-      { name: "Menzies Aviation", domain: "menziesaviation.com" },
-      { name: "OCS", domain: "ocs.nl" },
-      { name: "Randstad", domain: "randstad.nl" },
-      { name: "ROC van Amsterdam", domain: "rocva.nl" },
-      { name: "Royal Schiphol Group", domain: "schiphol.nl" },
-      { name: "Securitas", domain: "securitas.com" },
-      { name: "SPAR", domain: "spar.nl" },
-      { name: "STL", domain: "stl.nl" },
-      { name: "Swissport", domain: "swissport.com" },
-      { name: "TCR", domain: "tcrgroup.com" },
-      { name: "Transavia", domain: "transavia.com" },
-      { name: "Trigion", domain: "trigion.nl" },
-      { name: "TUI", domain: "tui.com" },
-      { name: "Vanderlande", domain: "vanderlande.com" },
-      { name: "Vebego", domain: "vebego.nl" },
-      { name: "Victoria Schoonmaakbedrijf", domain: "victoria.nl" },
-      { name: "Viggo", domain: "viggo.aero" },
-      { name: "VolkerWessels", domain: "volkerwessels.com" },
-      { name: "World of Delights", domain: "worldofdelights.nl" },
-      { name: "WSP Groot Amsterdam", domain: "wsp.com" },
-      { name: "Yusen Logistics", domain: "yusen-logistics.com" },
+      { name: "1nergiek",                   domain: "1nergiek.nl" },
+      { name: "ACN",                         domain: "acn.nl" },
+      { name: "Airport Construction Service",domain: "acs-schiphol.nl" },
+      { name: "Aramex",                      domain: "aramex.com" },
+      { name: "Arriva Touring",              domain: "arriva.nl" },
+      { name: "Asito",                       domain: "asito.nl" },
+      { name: "avi air.",                    domain: "aviair.nl" },
+      { name: "Aviapartner",                 domain: "aviapartner.com" },
+      { name: "Axxicom / Trigion",           domain: "facilicom.nl" },
+      { name: "Babcock",                     domain: "babcockinternational.com" },
+      { name: "Beumer Group",                domain: "beumergroup.com" },
+      { name: "Bos Logistics",               domain: "boslogistics.nl" },
+      { name: "Bruna",                       domain: "bruna.nl" },
+      { name: "Burger Food Group",           domain: "burgerking.com" },
+      { name: "Capi-Lux",                    domain: "capi.nl" },
+      { name: "Connexxion",                  domain: "transdev.nl" },
+      { name: "Corendon",                    domain: "corendon.com" },
+      { name: "CTSN",                        domain: "ctsn.nl" },
+      { name: "DAEL Security",               domain: "daelsecurity.nl" },
+      { name: "DHL Express",                 domain: "dhl.com" },
+      { name: "dnata",                       domain: "dnata.com" },
+      { name: "dormakaba",                   domain: "dormakaba.com" },
+      { name: "Douane Belastingdienst",      domain: "belastingdienst.nl" },
+      { name: "Enticon",                     domain: "enticon.nl" },
+      { name: "Eurest",                      domain: "eurest.nl" },
+      { name: "Fokker Services Group",       domain: "fokker.com" },
+      { name: "GASSAN",                      domain: "gassan.com" },
+      { name: "Gate Group",                  domain: "gategroup.com" },
+      { name: "Gom Schoonhouden",            domain: "gom.nl" },
+      { name: "GSA",                         domain: "gsa.nl" },
+      { name: "Hankyu Hanshin Express",      domain: "hh-express.com" },
+      { name: "HeadFirst",                   domain: "headfirst.nl" },
+      { name: "Heijmans",                    domain: "heijmans.nl" },
+      { name: "HMSHost",                     domain: "hmshost.com" },
+      { name: "Hogeschool v. Amsterdam",     domain: "hva.nl" },
+      { name: "House of Pilots",             domain: "houseofpilots.nl" },
+      { name: "I-SEC",                       domain: "i-sec.nl" },
+      { name: "JetSupport",                  domain: "jetsupport.nl" },
+      { name: "KLM",                         domain: "klm.com" },
+      { name: "KLM Catering Services",       domain: "klm.com" },
+      { name: "KLM Equipment Services",      domain: "klm.com" },
+      { name: "Koninklijke BAM Groep",       domain: "bam.nl" },
+      { name: "Koninklijke Marechaussee",    domain: "defensie.nl" },
+      { name: "Koninklijke Rotra",           domain: "rotra.nl" },
+      { name: "Lagardère",                   domain: "lagardere.com" },
+      { name: "Lamme",                       domain: "lamme.nl" },
+      { name: "Lelystad Airport",            domain: "lelystadairport.nl" },
+      { name: "LVNL",                        domain: "lvnl.nl" },
+      { name: "ManpowerGroup",               domain: "manpowergroup.com" },
+      { name: "MBO College Airport",         domain: "mbocollegeairport.nl" },
+      { name: "McDonald's",                  domain: "mcdonalds.com" },
+      { name: "Menzies Aviation",            domain: "menziesaviation.com" },
+      { name: "Outstanding",                 domain: "outstanding.nl" },
+      { name: "PAL aerospace",               domain: "palaerospace.com" },
+      { name: "Paraat",                      domain: "paraat.nl" },
+      { name: "PCH Dienstengroep",           domain: "pchdienstengroep.nl" },
+      { name: "Raggers",                     domain: "raggers.nl" },
+      { name: "Randstad",                    domain: "randstad.nl" },
+      { name: "Regional Jet Center",         domain: "regionaljetcenter.nl" },
+      { name: "RIFF Digital Engagement",     domain: "riff.nl" },
+      { name: "ROC van Amsterdam",           domain: "rocva.nl" },
+      { name: "Royal Schiphol Group",        domain: "schiphol.nl" },
+      { name: "Scarabee Aviation Group",     domain: "scarabee.com" },
+      { name: "Schiphol Airport Retail",     domain: "schiphol.nl" },
+      { name: "Seabourne Logistics",         domain: "seabournelogistics.com" },
+      { name: "Securitas",                   domain: "securitas.com" },
+      { name: "Special Cargo Services",      domain: "specialcargoservices.nl" },
+      { name: "Swissport",                   domain: "swissport.com" },
+      { name: "Transavia",                   domain: "transavia.com" },
+      { name: "TUI",                         domain: "tui.com" },
+      { name: "Vanderlande",                 domain: "vanderlande.com" },
+      { name: "Vebego",                      domain: "vebego.nl" },
+      { name: "Vermaat",                     domain: "vermaat.com" },
+      { name: "Victoria Schoonmaak",         domain: "victoriaschoonmaak.nl" },
+      { name: "Viggo",                       domain: "viggo.aero" },
+      { name: "VolkerWessels",               domain: "volkerwessels.com" },
+      { name: "World Flight Services",       domain: "wfs.aero" },
     ];
 
     function buildTicker() {
       const track = document.getElementById('ticker');
-      // Dupliceer voor naadloze loop
-      const allPartners = [...partners, ...partners];
-      allPartners.forEach(p => {
+      [...partners, ...partners].forEach(p => {
         const card = document.createElement('div');
         card.className = 'ticker-card';
         card.innerHTML = `
-          <img src="https://logo.clearbit.com/${p.domain}" alt="${p.name}" onerror="this.style.display='none'">
+          <img src="https://www.google.com/s2/favicons?domain=${p.domain}&sz=64" alt="${p.name}" onerror="this.style.display='none'">
           <span>${p.name}</span>
         `;
         track.appendChild(card);
@@ -363,12 +355,10 @@
       document.querySelectorAll('.innerpage').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
       document.getElementById('home').style.display = 'none';
-
       if (id === 'home') {
         document.getElementById('home').style.display = 'block';
         return;
       }
-
       document.getElementById('page-' + id).classList.add('active');
       const btn = document.getElementById('btn-' + id);
       if (btn) btn.classList.add('active');
@@ -377,6 +367,5 @@
 
     document.getElementById('home').style.display = 'block';
   </script>
-
 </body>
 </html>

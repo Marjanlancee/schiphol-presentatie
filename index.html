@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Schiphol — De toekomst van werk</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
 
-    /* ── IFRAME ── */
     iframe {
       position: fixed;
       inset: 0;
@@ -18,102 +19,116 @@
       z-index: 0;
     }
 
-    /* ── NAV ── */
-    nav {
+    /* ── TOP BAR ── */
+    .topbar {
       position: fixed;
       top: 0;
+      left: 0;
       right: 0;
       z-index: 100;
-      padding: 1.2rem 1.8rem;
-    }
-
-    /* Hamburger button */
-    .menu-btn {
       display: flex;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: rgba(6,8,15,0.55);
-      border: 1px solid rgba(136,196,220,0.2);
-      padding: 0.7rem 0.9rem;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.8rem;
+      background: rgba(6,8,15,0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .menu-btn span {
-      display: block;
-      width: 22px;
-      height: 1px;
-      background: #edeae4;
-      transition: all 0.3s ease;
-    }
-
-    .menu-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-    .menu-btn.open span:nth-child(2) { opacity: 0; }
-    .menu-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-    /* Dropdown */
-    .menu-dropdown {
-      position: absolute;
-      top: calc(100% + 0.4rem);
-      right: 1.8rem;
-      background: rgba(6,8,15,0.88);
-      border: 1px solid rgba(136,196,220,0.15);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      min-width: 200px;
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .menu-dropdown.open {
+    .logos {
       display: flex;
+      align-items: center;
+      gap: 1.2rem;
     }
 
-    .menu-dropdown a {
+    .logo-lcs {
+      height: 36px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.9;
+    }
+
+    .logo-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .logo-bright {
+      height: 24px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.45;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .nav-links a {
       font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.7rem;
       font-weight: 300;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #edeae4;
+      color: rgba(237,234,228,0.7);
       text-decoration: none;
-      padding: 0.85rem 1.4rem;
-      border-bottom: 1px solid rgba(136,196,220,0.08);
+      padding: 0.45rem 0.85rem;
+      border-radius: 2px;
       transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
     }
 
-    .menu-dropdown a:last-child { border-bottom: none; }
-
-    .menu-dropdown a:hover {
-      background: rgba(136,196,220,0.08);
+    .nav-links a:hover {
+      background: rgba(136,196,220,0.1);
       color: #88c4dc;
     }
 
-    .menu-dropdown a.highlight {
+    .nav-links a.highlight {
       color: #c47d30;
-      border-top: 1px solid rgba(196,125,48,0.2);
+      border: 1px solid rgba(196,125,48,0.35);
     }
 
-    .menu-dropdown a.highlight:hover {
-      background: rgba(196,125,48,0.08);
+    .nav-links a.highlight:hover {
+      background: rgba(196,125,48,0.1);
+      color: #d4904a;
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap');
+    /* ── OVERLAY TEKST ── */
+    .overlay-text {
+      position: fixed;
+      bottom: 3.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .overlay-text .label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(136,196,220,0.6);
+      font-weight: 300;
+    }
   </style>
 </head>
 <body>
 
   <iframe src="https://time-echo-story.lovable.app" allowfullscreen></iframe>
 
-  <nav>
-    <div class="menu-btn" id="menuBtn">
-      <span></span>
-      <span></span>
-      <span></span>
+  <div class="topbar">
+    <div class="logos">
+      <img src="logo-lcs.png" alt="Luchtvaart Community Schiphol" class="logo-lcs">
+      <div class="logo-divider"></div>
+      <img src="logo-bright.png" alt="Bright Work Solutions" class="logo-bright">
     </div>
-    <div class="menu-dropdown" id="menuDropdown">
+    <nav class="nav-links">
       <a href="#">Vraagstukken</a>
       <a href="#">Oefening</a>
       <a href="#">Scan</a>
@@ -121,26 +136,12 @@
       <a href="#">Framework</a>
       <a href="#">Samen</a>
       <a href="#" class="highlight">2030</a>
-    </div>
-  </nav>
+    </nav>
+  </div>
 
-  <script>
-    const btn = document.getElementById('menuBtn');
-    const dropdown = document.getElementById('menuDropdown');
-
-    btn.addEventListener('click', () => {
-      btn.classList.toggle('open');
-      dropdown.classList.toggle('open');
-    });
-
-    // Sluit menu bij klik buiten
-    document.addEventListener('click', (e) => {
-      if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
-        btn.classList.remove('open');
-        dropdown.classList.remove('open');
-      }
-    });
-  </script>
+  <div class="overlay-text">
+    <span class="label">(ontwikkelingen)</span>
+  </div>
 
 </body>
 </html>

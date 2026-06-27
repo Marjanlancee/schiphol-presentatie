@@ -15,12 +15,13 @@
     .topbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 1.8rem;
-      background: rgba(6,8,15,0.75);
+      padding: 0.6rem 1.8rem;
+      background: rgba(6,8,15,0.82);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
+      min-height: 90px;
     }
-    .logo-lcs { height: 70px; cursor: pointer; }
+    .logo-lcs { height: 70px; cursor: pointer; object-fit: contain; }
     .nav-links { display: flex; align-items: center; gap: 0.1rem; flex-wrap: wrap; justify-content: flex-end; }
     .nav-links button {
       font-family: "Inter", sans-serif; font-size: 0.62rem; font-weight: 300;
@@ -98,7 +99,7 @@
 
   <!-- LCS -->
   <div class="innerpage" id="page-lcs">
-    <div style="background:#fff; padding:5rem 2rem 3rem; text-align:center; border-bottom:4px solid #8cb800;">
+    <div style="background:#fff; padding:5rem 2rem 3rem; text-align:center; border-bottom:4px solid #bbb800;">
       <img src="logo-lcs.png" style="height:90px; display:block; margin:0 auto 1.5rem;">
       <h1 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); font-weight:400; color:#1a1a2e; line-height:1.1; margin-bottom:1rem;">Samen mensen in beweging brengen</h1>
       <p style="font-size:1.1rem; color:#555; max-width:640px; margin:0 auto; line-height:1.8;">Welkom bij Luchtvaart Community Schiphol!</p>
@@ -108,7 +109,7 @@
         <p style="font-size:1.05rem; line-height:1.85; color:#333; margin-bottom:1.2rem;">Samen bouwen aan een sterke, aantrekkelijke en toekomstbestendige arbeidsmarkt op Schiphol. Met meer dan <strong>70 aangesloten bedrijven</strong> zet LCS zich in voor duurzame inzetbaarheid, de ontwikkeling van medewerkers en het aantrekken van nieuw talent.</p>
       </div>
     </div>
-    <div style="background:#8cb800; padding:3rem 2rem;">
+    <div style="background:#bbb800; padding:3rem 2rem;">
       <div style="max-width:860px; margin:0 auto;">
         <p style="font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.8); margin-bottom:0.8rem;">Vandaag</p>
         <h2 style="font-family:'Playfair Display',serif; font-size:clamp(1.5rem,4vw,2.5rem); font-weight:300; color:#fff; margin-bottom:1rem; line-height:1.2;">Masterclass: Duurzame retentie en kennisborging door inzicht in skills</h2>
@@ -117,11 +118,11 @@
     </div>
     <div style="background:#fff; padding:3rem 2rem; overflow:hidden;">
       <div style="max-width:860px; margin:0 auto 2rem;">
-        <p style="font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:#8cb800; margin-bottom:0.5rem;">Onze partners</p>
+        <p style="font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:#bbb800; margin-bottom:0.5rem;">Onze partners</p>
         <p style="color:#555; font-size:0.95rem;">Meer dan 70 bedrijven zijn aangesloten bij LCS.</p>
       </div>
       <div style="overflow:hidden;">
-        <div style="display:flex; gap:2rem; align-items:center; animation:lcsscroll 25s linear infinite; width:max-content;">
+        <div style="display:flex; gap:2rem; align-items:center; animation:lcsscroll 80s linear infinite; width:max-content;">
           <div style="background:#f0f0f0; padding:0.7rem 1.5rem; font-weight:600; color:#333; white-space:nowrap; font-family:Inter,sans-serif; font-size:0.9rem;">Asito</div>
           <div style="background:#f0f0f0; padding:0.7rem 1.5rem; font-weight:600; color:#333; white-space:nowrap; font-family:Inter,sans-serif; font-size:0.9rem;">ACN</div>
           <div style="background:#f0f0f0; padding:0.7rem 1.5rem; font-weight:600; color:#333; white-space:nowrap; font-family:Inter,sans-serif; font-size:0.9rem;">Aviapartner</div>

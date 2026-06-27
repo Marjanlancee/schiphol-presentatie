@@ -6,114 +6,50 @@
   <title>Schiphol — De toekomst van werk</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
-
-    iframe {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      z-index: 0;
-    }
-
-    /* ── TOP BAR ── */
+    iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: none; z-index: 0; }
     .topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.8rem;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.8rem 1.8rem;
       background: rgba(6,8,15,0.65);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-
-    /* LCS logo — groter, originele kleuren bewaard via mix-blend */
-    .logo-lcs {
-      height: 48px;
-      width: auto;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0.2rem;
-    }
-
+    .logo-lcs { height: 52px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 0.15rem; flex-wrap: wrap; justify-content: flex-end; }
     .nav-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(237,234,228,0.75);
-      text-decoration: none;
-      padding: 0.45rem 0.85rem;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
+      font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 300;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(237,234,228,0.75); text-decoration: none;
+      padding: 0.4rem 0.7rem; transition: background 0.2s, color 0.2s; white-space: nowrap;
     }
-
-    .nav-links a:hover {
-      background: rgba(136,196,220,0.1);
-      color: #88c4dc;
-    }
-
-    .nav-links a.highlight {
-      color: #c47d30;
-      border: 1px solid rgba(196,125,48,0.4);
-    }
-
-    .nav-links a.highlight:hover {
-      background: rgba(196,125,48,0.1);
-    }
-
-    /* ── BRIGHT — rechtsonder ── */
-    .logo-bright-wrap {
-      position: fixed;
-      bottom: 1.2rem;
-      right: 1.5rem;
-      z-index: 100;
-    }
-
-    .logo-bright {
-      height: 22px;
-      width: auto;
-      opacity: 0.4;
-      filter: brightness(0) invert(1);
-      transition: opacity 0.2s;
-    }
-
+    .nav-links a:hover { background: rgba(136,196,220,0.1); color: #88c4dc; }
+    .nav-links a.highlight { color: #c47d30; border: 1px solid rgba(196,125,48,0.4); }
+    .nav-links a.highlight:hover { background: rgba(196,125,48,0.1); }
+    .logo-bright-wrap { position: fixed; bottom: 1.2rem; right: 1.5rem; z-index: 100; }
+    .logo-bright { height: 26px; width: auto; opacity: 0.45; filter: brightness(0) invert(1); transition: opacity 0.2s; }
     .logo-bright:hover { opacity: 0.7; }
   </style>
 </head>
 <body>
-
   <iframe src="https://time-echo-story.lovable.app" allowfullscreen></iframe>
-
   <div class="topbar">
     <img src="logo-lcs.png" alt="Luchtvaart Community Schiphol" class="logo-lcs">
     <nav class="nav-links">
-      <a href="#">Vraagstukken</a>
-      <a href="#">Oefening</a>
-      <a href="#">Scan</a>
-      <a href="#">Skills</a>
-      <a href="#">Framework</a>
-      <a href="#">Samen</a>
-      <a href="#" class="highlight">2030</a>
+      <a href="pages/lcs.html">LCS</a>
+      <a href="pages/bright-agenda.html">Bright & Agenda</a>
+      <a href="pages/jouw-werkplek.html">Jouw werkplek</a>
+      <a href="pages/vraagstukken.html">Vraagstukken</a>
+      <a href="pages/jouw-organisatie.html">Jouw organisatie</a>
+      <a href="pages/skills-framework.html">Skills & Framework</a>
+      <a href="pages/future-skills.html">Future Skills</a>
+      <a href="pages/scan.html" class="highlight">Skills Scan</a>
     </nav>
   </div>
-
   <div class="logo-bright-wrap">
     <img src="logo-bright.png" alt="Bright Work Solutions" class="logo-bright">
   </div>
-
 </body>
 </html>

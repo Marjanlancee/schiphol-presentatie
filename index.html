@@ -3,53 +3,264 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Schiphol — De toekomst van werk</title>
+  <title>LCS — De toekomst van werk op Schiphol</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300&family=Inter:wght@200;300;400;500&display=swap");
+    :root { --ink: #06080f; --sky: #88c4dc; --amber: #c47d30; --mist: #6a8090; --white: #edeae4; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; overflow: hidden; }
-    iframe { position: fixed; inset: 0; width: 100%; height: 100%; border: none; z-index: 0; }
+    html, body { width: 100%; height: 100%; }
+    body { background: var(--ink); color: var(--white); font-family: "Inter", sans-serif; font-weight: 300; }
+
+    /* TOPBAR */
     .topbar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.8rem 1.8rem;
-      background: rgba(6,8,15,0.65);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      background: rgba(6,8,15,0.75);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .logo-lcs { height: 52px; width: auto; }
-    .nav-links { display: flex; align-items: center; gap: 0.15rem; flex-wrap: wrap; justify-content: flex-end; }
-    .nav-links a {
-      font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 300;
+    .logo-lcs { height: 44px; cursor: pointer; }
+    .nav-links { display: flex; align-items: center; gap: 0.1rem; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links button {
+      font-family: "Inter", sans-serif; font-size: 0.62rem; font-weight: 300;
       letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(237,234,228,0.75); text-decoration: none;
-      padding: 0.4rem 0.7rem; transition: background 0.2s, color 0.2s; white-space: nowrap;
+      color: rgba(237,234,228,0.65); background: none; border: none;
+      cursor: pointer; padding: 0.4rem 0.7rem;
+      transition: background 0.2s, color 0.2s; white-space: nowrap;
     }
-    .nav-links a:hover { background: rgba(136,196,220,0.1); color: #88c4dc; }
-    .nav-links a.highlight { color: #c47d30; border: 1px solid rgba(196,125,48,0.4); }
-    .nav-links a.highlight:hover { background: rgba(196,125,48,0.1); }
+    .nav-links button:hover { background: rgba(136,196,220,0.1); color: #88c4dc; }
+    .nav-links button.active { color: #88c4dc; border-bottom: 1px solid rgba(136,196,220,0.4); }
+    .nav-links button.highlight { color: #c47d30; border: 1px solid rgba(196,125,48,0.4); }
+    .nav-links button.highlight.active { background: rgba(196,125,48,0.08); }
+
+    /* LOGO BRIGHT */
     .logo-bright-wrap { position: fixed; bottom: 1.2rem; right: 1.5rem; z-index: 100; }
-    .logo-bright { height: 26px; width: auto; opacity: 0.45; filter: brightness(0) invert(1); transition: opacity 0.2s; }
-    .logo-bright:hover { opacity: 0.7; }
+    .logo-bright { height: 24px; opacity: 0.4; filter: brightness(0) invert(1); }
+
+    /* HOME = IFRAME */
+    #home {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+    #home iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* INNER PAGES */
+    .innerpage {
+      display: none;
+      position: fixed; inset: 0;
+      background: var(--ink);
+      overflow-y: auto;
+      z-index: 10;
+    }
+    .innerpage.active { display: block; }
+
+    .page {
+      padding: 8rem 2rem 5rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .label { font-size: 0.6rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; }
+    h1 { font-family: "Playfair Display", serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 2rem; }
+    h1 em { font-style: italic; color: var(--sky); }
+    h2 { font-family: "Playfair Display", serif; font-size: 1.6rem; font-weight: 300; color: var(--white); margin: 2.5rem 0 0.8rem; }
+    p { font-size: 1rem; line-height: 1.85; color: var(--mist); margin-bottom: 1.2rem; max-width: 640px; }
+    p strong { color: var(--white); font-weight: 400; }
+    .placeholder { margin-top: 2rem; padding: 1.5rem 2rem; border: 1px dashed rgba(136,196,220,0.2); font-size: 0.8rem; color: rgba(106,128,144,0.5); font-style: italic; }
+    .sep { border: none; border-top: 1px solid rgba(136,196,220,0.08); margin: 2.5rem 0; }
+    .cta { display: inline-block; margin-top: 2rem; padding: 0.7rem 1.6rem; border: 1px solid rgba(196,125,48,0.5); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber); cursor: pointer; background: none; font-family: "Inter", sans-serif; transition: background 0.2s; }
+    .cta:hover { background: rgba(196,125,48,0.1); }
   </style>
 </head>
 <body>
-  <iframe src="https://time-echo-story.lovable.app" allowfullscreen></iframe>
+
+  <!-- TOPBAR -->
   <div class="topbar">
-    <img src="logo-lcs.png" alt="Luchtvaart Community Schiphol" class="logo-lcs">
+    <img src="logo-lcs.png" class="logo-lcs" alt="LCS" onclick="showPage('home')">
     <nav class="nav-links">
-      <a href="pages/lcs.html">LCS</a>
-      <a href="pages/bright-agenda.html">Bright & Agenda</a>
-      <a href="pages/jouw-werkplek.html">Jouw werkplek</a>
-      <a href="pages/vraagstukken.html">Vraagstukken</a>
-      <a href="pages/jouw-organisatie.html">Jouw organisatie</a>
-      <a href="pages/skills-framework.html">Skills & Framework</a>
-      <a href="pages/future-skills.html">Future Skills</a>
-      <a href="pages/scan.html" class="highlight">Skills Scan</a>
+      <button onclick="showPage('lcs')" id="btn-lcs">LCS</button>
+      <button onclick="showPage('bright')" id="btn-bright">Bright en Agenda</button>
+      <button onclick="showPage('werkplek')" id="btn-werkplek">Jouw werkplek</button>
+      <button onclick="showPage('vraagstukken')" id="btn-vraagstukken">Vraagstukken</button>
+      <button onclick="showPage('organisatie')" id="btn-organisatie">Jouw organisatie</button>
+      <button onclick="showPage('skills')" id="btn-skills">Skills en Framework</button>
+      <button onclick="showPage('future')" id="btn-future">Future Skills</button>
+      <button onclick="showPage('scan')" id="btn-scan" class="highlight">Skills Scan</button>
     </nav>
   </div>
-  <div class="logo-bright-wrap">
-    <img src="logo-bright.png" alt="Bright Work Solutions" class="logo-bright">
+
+  <!-- HOME: FILMPJE -->
+  <div id="home">
+    <iframe src="https://time-echo-story.lovable.app" allowfullscreen></iframe>
   </div>
+
+  <!-- LCS -->
+  <div class="innerpage" id="page-lcs">
+    <div class="page">
+      <p class="label">Wie wij zijn</p>
+      <h1>Samen mensen<br><em>in beweging brengen.</em></h1>
+      <p>LCS is een netwerk van bedrijven in verbinding met onderwijs en overheid. Ons doel is om samen de arbeidsmarkt op Schiphol duurzaam te versterken en aantrekkelijk te maken.</p>
+      <p>We verbinden <strong>bedrijven, onderwijs, overheid, studenten, werkenden en werkzoekenden</strong>, allemaal rondom een gedeeld doel: duurzame werkgelegenheid op Schiphol.</p>
+      <hr class="sep">
+      <h2>Wat wij doen</h2>
+      <div class="placeholder">Hier kun je later meer toevoegen over de programmas en activiteiten van LCS.</div>
+      <hr class="sep">
+      <h2>Onze missie</h2>
+      <div class="placeholder">Voeg hier de missie en visie van LCS toe.</div>
+    </div>
+  </div>
+
+  <!-- BRIGHT EN AGENDA -->
+  <div class="innerpage" id="page-bright">
+    <div class="page">
+      <p class="label">Partner en Planning</p>
+      <h1>Bright Work Solutions<br><em>en Agenda</em></h1>
+      <p><strong>Bright Work Solutions</strong> is onze partner in het ontwikkelen van mensen en organisaties op Schiphol. Samen werken we aan duurzame inzetbaarheid en toekomstbestendig werk.</p>
+      <hr class="sep">
+      <h2>Agenda</h2>
+      <div class="placeholder">Voeg hier de komende evenementen, bijeenkomsten en activiteiten toe.</div>
+      <hr class="sep">
+      <h2>Goed doel</h2>
+      <div class="placeholder">Voeg hier informatie toe over het goede doel en de call to action.</div>
+      <button class="cta">Meld je aan</button>
+    </div>
+  </div>
+
+  <!-- JOUW WERKPLEK -->
+  <div class="innerpage" id="page-werkplek">
+    <div class="page">
+      <p class="label">Oefening</p>
+      <h1>Hoe ziet jouw werkplek<br><em>er in 2030 uit?</em></h1>
+      <p>In de uitnodiging zat een QR code waarmee je een tool kon verkennen. Hoe was dat voor jou?</p>
+      <p><strong>Wat vond je ervan?</strong> Ben je er ook al mee bezig, of schrik je er een beetje van?</p>
+      <hr class="sep">
+      <h2>Automatiseer je werkplek</h2>
+      <p>In deze oefening verken je welke taken op jouw werkplek al deels geautomatiseerd kunnen worden, en wat dat betekent voor jou en je collegas.</p>
+      <div class="placeholder">Voeg hier de QR code of link naar de tool toe.</div>
+      <hr class="sep">
+      <h2>Jouw reflectie</h2>
+      <div class="placeholder">Voeg hier vragen of een oefening toe waarmee deelnemers kunnen reflecteren.</div>
+    </div>
+  </div>
+
+  <!-- VRAAGSTUKKEN -->
+  <div class="innerpage" id="page-vraagstukken">
+    <div class="page">
+      <p class="label">Vraagstukken</p>
+      <h1>De drie grote<br><em>vraagstukken.</em></h1>
+      <p>Schiphol staat voor ingrijpende veranderingen. Drie vraagstukken bepalen de toekomst van werk op de luchthaven.</p>
+      <hr class="sep">
+      <h2>1. Structurele krapte</h2>
+      <div class="placeholder">Voeg hier de inhoud toe over vraagstuk 1.</div>
+      <hr class="sep">
+      <h2>2. Arbeidsproductiviteit</h2>
+      <div class="placeholder">Voeg hier de inhoud toe over vraagstuk 2.</div>
+      <hr class="sep">
+      <h2>3. Werk dat verandert</h2>
+      <div class="placeholder">Voeg hier de inhoud toe over vraagstuk 3.</div>
+    </div>
+  </div>
+
+  <!-- JOUW ORGANISATIE -->
+  <div class="innerpage" id="page-organisatie">
+    <div class="page">
+      <p class="label">Jouw organisatie</p>
+      <h1>Als ik over 3 jaar bij jouw<br><em>organisatie naar binnen loop...</em></h1>
+      <p>Wat is er dan veranderd? Hoe ziet het werk eruit? Welke mensen werken er, en wat doen zij anders dan nu?</p>
+      <p>Met de <strong>light volwassenheids scan</strong> krijg je in korte tijd inzicht in waar jouw organisatie staat op het gebied van toekomstbestendig werk.</p>
+      <hr class="sep">
+      <h2>Light Volwassenheids Scan</h2>
+      <div class="placeholder">Voeg hier de scan of link naar de scan toe.</div>
+      <hr class="sep">
+      <h2>Wat levert het op?</h2>
+      <div class="placeholder">Beschrijf hier wat deelnemers uit de scan halen.</div>
+      <button class="cta" onclick="showPage('scan')">Vraag de uitgebreide scan aan</button>
+    </div>
+  </div>
+
+  <!-- SKILLS EN FRAMEWORK -->
+  <div class="innerpage" id="page-skills">
+    <div class="page">
+      <p class="label">Skills verhaal</p>
+      <h1>De brugfunctie<br><em>van skills.</em></h1>
+      <p>Skills zijn de brug tussen het werk van vandaag en het werk van morgen. Niet functies, maar <strong>wat mensen kunnen</strong> bepaalt de toekomst.</p>
+      <p>Het LCS skills framework helpt organisaties om inzichtelijk te maken welke competenties nu aanwezig zijn, en welke ontwikkeld moeten worden.</p>
+      <hr class="sep">
+      <h2>Het framework</h2>
+      <div class="placeholder">Voeg hier het skills framework toe, visueel of als tekst.</div>
+      <hr class="sep">
+      <h2>Hoe gebruik je het?</h2>
+      <div class="placeholder">Beschrijf hier hoe organisaties het framework kunnen inzetten.</div>
+    </div>
+  </div>
+
+  <!-- FUTURE SKILLS -->
+  <div class="innerpage" id="page-future">
+    <div class="page">
+      <p class="label">Future Skills</p>
+      <h1>Welk werk gaat<br><em>veranderen?</em></h1>
+      <p>In kaart brengen welk werk er gaat veranderen, of verdwijnen, en daar nu al op inspelen. Niet door grote reorganisaties, maar door mensen in <strong>kleine stapjes te laten ontwikkelen.</strong></p>
+      <p>Ontwikkelen en inzetbaar blijven. Leven lang ontwikkelen als motor voor duurzame werkgelegenheid op Schiphol.</p>
+      <hr class="sep">
+      <h2>Welke skills zijn de toekomst?</h2>
+      <div class="placeholder">Voeg hier de future skills toe, per sector of functiegebied.</div>
+      <hr class="sep">
+      <h2>Kleine stapjes, groot verschil</h2>
+      <div class="placeholder">Beschrijf hier voorbeelden van ontwikkeltrajecten of programmas.</div>
+      <hr class="sep">
+      <h2>Leven Lang Ontwikkelen</h2>
+      <div class="placeholder">Voeg hier informatie toe over LLO mogelijkheden en subsidies.</div>
+    </div>
+  </div>
+
+  <!-- SKILLS SCAN -->
+  <div class="innerpage" id="page-scan">
+    <div class="page">
+      <p class="label">Afsluiter</p>
+      <h1>Vraag de volwassenheids<br><em>scan aan.</em></h1>
+      <p>De uitgebreide volwassenheids scan gaat verder dan de quick scan. Hij neemt echte <strong>bedrijfsinformatie</strong> mee, en sectorinformatie.</p>
+      <p>Denk aan: vacatures, verloop, groei in de sector. Zo krijg je een compleet beeld van waar jouw organisatie staat en wat er in de markt speelt.</p>
+      <hr class="sep">
+      <h2>Wat krijg je?</h2>
+      <div class="placeholder">Beschrijf hier de deliverables van de uitgebreide scan.</div>
+      <hr class="sep">
+      <h2>Voor wie?</h2>
+      <div class="placeholder">Beschrijf hier de doelgroep van de scan.</div>
+      <hr class="sep">
+      <h2>Wat dan?</h2>
+      <p>Na de scan weet je precies waar je staat. En nog belangrijker, wat de volgende stap is. LCS en Bright Work Solutions helpen je verder.</p>
+      <div class="placeholder">Voeg hier een aanvraagformulier of contactgegevens toe.</div>
+      <button class="cta">Scan aanvragen</button>
+    </div>
+  </div>
+
+  <!-- BRIGHT LOGO RECHTSONDER -->
+  <div class="logo-bright-wrap">
+    <img src="logo-bright.png" class="logo-bright" alt="Bright">
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.innerpage').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+      document.getElementById('home').style.display = 'none';
+
+      if (id === 'home') {
+        document.getElementById('home').style.display = 'block';
+        return;
+      }
+
+      document.getElementById('page-' + id).classList.add('active');
+      const btn = document.getElementById('btn-' + id);
+      if (btn) btn.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    // Start met filmpje
+    document.getElementById('home').style.display = 'block';
+  </script>
+
 </body>
 </html>

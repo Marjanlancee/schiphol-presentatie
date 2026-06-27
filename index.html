@@ -278,57 +278,10 @@
 
     <!-- SCHERM 1: emotie + foto -->
     <div style="position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-      <div style="position:absolute;inset:0;overflow:hidden;background:#070e1a;">
-        <canvas id="nightcanvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(7,14,26,0.15) 0%,transparent 40%,rgba(7,14,26,0.65) 100%);"></div>
+      <div style="position:absolute;inset:0;overflow:hidden;">
+        <div style="position:absolute;inset:0;background-image:url('scene-werkplek.jpg');background-size:cover;background-position:center top;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(5,10,20,0.3) 0%,rgba(5,10,20,0.2) 40%,rgba(5,10,20,0.75) 100%);"></div>
       </div>
-      <script>
-      (function(){
-        var c=document.getElementById("nightcanvas");
-        if(!c)return;
-        var ctx=c.getContext("2d");
-        var W,H;
-        function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
-        resize();
-        window.addEventListener("resize",resize);
-        var stars=[];
-        for(var i=0;i<200;i++){stars.push({x:Math.random(),y:Math.random()*0.58,r:Math.random()*1.4+0.3,o:Math.random()*0.6+0.3,tw:Math.random()*3+1});}
-        var lights=[];
-        var cols=["#e8a87c","#e8a87c","#e8a87c","#8ecfc9","#fff","#a8d5a2","#6db8e0"];
-        for(var i=0;i<80;i++){lights.push({x:Math.random(),y:0.63+Math.random()*0.34,r:Math.random()*2+0.6,c:cols[Math.floor(Math.random()*cols.length)],o:Math.random()*0.5+0.2,tw:Math.random()*4+2});}
-        var plane={x:-0.1,y:0.18,speed:0.0008};
-        var t=0;
-        function draw(){
-          t+=0.016;
-          ctx.clearRect(0,0,W,H);
-          var sky=ctx.createLinearGradient(0,0,0,H*0.63);
-          sky.addColorStop(0,"#030810");
-          sky.addColorStop(0.7,"#0a1628");
-          sky.addColorStop(1,"#0d1f10");
-          ctx.fillStyle=sky;ctx.fillRect(0,0,W,H*0.63);
-          var grd=ctx.createLinearGradient(0,H*0.63,0,H);
-          grd.addColorStop(0,"#050c18");grd.addColorStop(1,"#020406");
-          ctx.fillStyle=grd;ctx.fillRect(0,H*0.63,W,H*0.37);
-          var hg=ctx.createRadialGradient(W*0.5,H*0.64,0,W*0.5,H*0.64,W*0.55);
-          hg.addColorStop(0,"rgba(196,125,48,0.22)");hg.addColorStop(0.5,"rgba(196,125,48,0.06)");hg.addColorStop(1,"transparent");
-          ctx.fillStyle=hg;ctx.fillRect(0,H*0.42,W,H*0.35);
-          stars.forEach(function(s){var f=0.65+0.35*Math.sin(t*s.tw+s.x*12);ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+(s.o*f)+")";ctx.fill();});
-          ctx.strokeStyle="rgba(232,168,124,0.2)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,H*0.638);ctx.lineTo(W,H*0.638);ctx.stroke();
-          lights.forEach(function(l){var f=0.75+0.25*Math.sin(t*l.tw+l.x*18);var g=ctx.createRadialGradient(l.x*W,l.y*H,0,l.x*W,l.y*H,l.r*5);g.addColorStop(0,l.c);g.addColorStop(1,"transparent");ctx.beginPath();ctx.arc(l.x*W,l.y*H,l.r*5,0,Math.PI*2);ctx.fillStyle=g;ctx.globalAlpha=l.o*f*0.35;ctx.fill();ctx.beginPath();ctx.arc(l.x*W,l.y*H,l.r,0,Math.PI*2);ctx.fillStyle=l.c;ctx.globalAlpha=l.o*f;ctx.fill();ctx.globalAlpha=1;});
-          plane.x+=plane.speed;if(plane.x>1.15)plane.x=-0.1;
-          var px=plane.x*W,py=plane.y*H;
-          ctx.save();ctx.translate(px,py);
-          ctx.fillStyle="rgba(237,234,228,0.85)";
-          ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(28,3);ctx.lineTo(22,8);ctx.lineTo(-8,6);ctx.closePath();ctx.fill();
-          ctx.beginPath();ctx.moveTo(8,4);ctx.lineTo(22,14);ctx.lineTo(18,16);ctx.lineTo(4,8);ctx.closePath();ctx.fill();
-          ctx.beginPath();ctx.moveTo(-4,5);ctx.lineTo(4,14);ctx.lineTo(1,15);ctx.lineTo(-7,8);ctx.closePath();ctx.fill();
-          ctx.fillStyle="rgba(142,207,201,0.9)";ctx.beginPath();ctx.arc(20,4,1.5,0,Math.PI*2);ctx.fill();
-          ctx.restore();
-          requestAnimationFrame(draw);
-        }
-        draw();
-      })();
-      </script>
 
       <div style="position:relative; max-width:800px; padding:2rem; text-align:center;">
         <p style="font-size:0.65rem; letter-spacing:0.4em; text-transform:uppercase; color:#8ecfc9; margin-bottom:2rem;">Jullie hebben thuis alvast een kijkje genomen in 2030.</p>
